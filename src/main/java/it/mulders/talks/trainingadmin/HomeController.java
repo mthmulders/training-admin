@@ -1,4 +1,4 @@
-package it.mulders.talks.training_admin;
+package it.mulders.talks.trainingadmin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
