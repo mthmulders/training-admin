@@ -4,8 +4,11 @@ Training Admin is a fictitious application.
 It is not designed to be production ready, nor will it ever be.
 I wrote it solely to illustrate the capabilities and the disabilities of digital coding assistants such as GitHub Copilot Workspaces.
 
-1. to explore some interesting technologies.
-2. to provide insight in the DMARC reports I receive.
+The functional scope is a training provider that wants to administer
+- The courses they offer
+- When the courses are delivered
+- The reservations for course deliveries
+- Student details
 
 ## Technologies
 The project uses the following technologies
