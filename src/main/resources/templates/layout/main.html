@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html th:lang="|${#locale.language}-${#locale.country}|"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      data-theme="winter">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +11,23 @@
     
 </head>
 <body>
+<nav>
+    <div class="navbar bg-base-100 shadow-sm mb-2">
+        <div class="navbar-start">
+            <a class="btn btn-ghost text-xl">Training Admin</a>
+        </div>
+        <div class="navbar-center">
+            <ul class="menu menu-vertical lg:menu-horizontal bg-base-200 rounded-box px-1">
+                <li><a>Courses</a></li>
+                <li><a>Course Editions</a></li>
+                <li><a>Students</a></li>
+                <li><a>Reservations</a></li>
+            </ul>
+        </div>
+        <div class="navbar-end">
+        </div>
+    </div>
+</nav>
 <main layout:fragment="content">
 </main>
 
