@@ -6,34 +6,24 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.4.3</version>
         <relativePath/>
-        <!-- lookup parent from repository -->
     </parent>
+
     <groupId>it.mulders.talks</groupId>
     <artifactId>training-admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Training Admin</name>
-    <description>Demo project for Spring Boot</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
+
     <properties>
         <java.version>23</java.version>
+
         <!-- Maven plugins -->
         <frontend-maven-plugin.version>1.15.0</frontend-maven-plugin.version>
         <frontend-maven-plugin.nodeVersion>v20.10.0</frontend-maven-plugin.nodeVersion>
         <frontend-maven-plugin.npmVersion>10.2.3</frontend-maven-plugin.npmVersion>
     </properties>
+
     <dependencies>
+        <!-- Spring Boot & friends -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -51,6 +41,7 @@
             <groupId>nz.net.ultraq.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>
         </dependency>
+
         <!-- Web dependencies -->
         <dependency>
             <groupId>org.webjars</groupId>
@@ -68,6 +59,7 @@
             <version>4.0.1</version>
         </dependency>
     </dependencies>
+
     <build>
         <resources>
             <resource>
@@ -127,6 +119,7 @@
             </plugins>
         </pluginManagement>
     </build>
+
     <profiles>
         <profile>
             <id>release</id>
