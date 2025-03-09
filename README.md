@@ -13,7 +13,7 @@ The functional scope is a training provider that wants to administer
 ## Technologies
 The project uses the following technologies
 - [Kotlin](https://kotlinlang.org/)
-- [Spring Boot](https://spring.io/projects/spring-boot)
+- [Spring Boot](https://spring.io/projects/spring-boot) & [Spring Web MVC](https://docs.spring.io/spring-framework/reference/web/webmvc.html)
 - [Thymeleaf](https://www.thymeleaf.org/)
 - [Tailwind CSS](https://tailwindcss.com/) & [DaisyUI](https://daisyui.com/)
 
