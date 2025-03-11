@@ -1,9 +1,11 @@
 package it.mulders.talks.trainingadmin.courses
 
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import jakarta.validation.Valid;
+import org.slf4j.LoggerFactory
 import org.springframework.data.domain.PageRequest
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -15,7 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam
 @RequestMapping("/courses")
 class CoursesController(private val courseRepository: CourseRepository) {
     @GetMapping("/list")
-    fun list(model: Model, @RequestParam("page") pageNumber: Int?): String {
+    fun list(model: Model, @RequestParam("page") pageNumber: Int?, request: HttpServletRequest): String {
+        val log = LoggerFactory.getLogger(CoursesController::class.java)
+        request.headerNames.toList().forEach { name ->
+            request.getHeaders(name).toList().forEach { value ->
+                log.info("header {}={}", name, value)
+            }
+        }
+
         val page = courseRepository.findAll(PageRequest.of(pageNumber ?: 0, PAGE_SIZE))
         model.addAttribute("page", page)
 
