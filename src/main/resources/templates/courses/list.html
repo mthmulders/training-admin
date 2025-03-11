@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<body>
+<div layout:fragment="content">
+    <div class="overflow-x-auto">
+        <table class="table mb-5" th:if="${not #lists.isEmpty(page.content)}">
+            <thead>
+            <tr>
+                <th class="w-3/8">Course ID</th>
+                <th class="w-1/2">Name</th>
+                <th class="w-1/8"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="course : ${page.content}"  class="hover:bg-base-300">
+                <th th:text="${course.courseId}">COURSE</th>
+                <td th:text="${course.name}">Course Name</td>
+                <td>
+                    <a th:href="'/courses/edit/' + ${course.courseId}" class="inline-block">
+                        <span th:replace="~{shared/icons :: pencil-solid('icon stroke-current size-6')}">
+                        </span>
+                    </a>
+                    <a th:href="'/courses/delete/' + ${course.courseId}" class="inline-block">
+                        <span th:replace="~{shared/icons :: trash-solid('icon stroke-error fill-error size-6')}">
+                        </span>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3">
+                    <a role="button" class="btn btn-secondary" href="/courses/new">
+                        <span th:replace="~{shared/icons :: plus-circle-solid('icon size-6')}"></span>
+                        Add
+                    </a>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+        <div class="w-full text-center">
+            <div class="join ml-auto mr-auto">
+                <a role="button" class="join-item btn" th:if="${page.number != 0}" th:href="'/courses/list?page=' + ${pageNumber - 1}">«</a>
+                <a role="button" class="join-item btn" href="#" th:text="'Page ' + ${page.number + 1}">Page 22</a>
+                <a role="button" class="join-item btn" th:if="${page.number != page.totalPages - 1}" th:href="'/courses/list?page=' + ${pageNumber + 1}">»</a>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block layout:fragment="script-content">
+    <!-- Add additional scripts there that are only needed for this page (Application wide scripts should be added in layout/main.html) -->
+</th:block>
+</body>
+</html>

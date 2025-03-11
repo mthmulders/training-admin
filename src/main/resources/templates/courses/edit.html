@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<body>
+<div layout:fragment="content">
+    <div class="overflow-x-auto">
+        <form method="post" action="#" th:action="@{/courses/save}" th:object="${course}">
+            <fieldset class="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
+                <legend class="fieldset-legend">Course details</legend>
+
+                <input type="hidden" th:field="*{id}" />
+
+                <label class="fieldset-label" for="courseId">Course ID</label>
+                <input id="courseId" type="text" th:field="*{courseId}" th:class="${#fields.hasErrors('name') ? 'input input-error' : 'input'}"  th:readonly="${not(#strings.isEmpty(id))}" />
+                <div role="alert" class="alert alert-error alert-soft" th:if="${#fields.hasErrors('courseId')}">
+                    <span th:text="${#strings.listJoin(#fields.errors('courseId'), ', ')}">Error</span>
+                </div>
+
+                <label class="fieldset-label" for="name">Course Name</label>
+                <input id="name" type="text" th:field="*{name}" th:class="${#fields.hasErrors('name') ? 'input input-error' : 'input'}" />
+                <div role="alert" class="alert alert-error alert-soft" th:if="${#fields.hasErrors('name')}">
+                    <span th:text="${#strings.listJoin(#fields.errors('name'), ', ')}">Error</span>
+                </div>
+
+                <button class="btn btn-primary mt-4" type="submit">Save</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+</body>
+</html>

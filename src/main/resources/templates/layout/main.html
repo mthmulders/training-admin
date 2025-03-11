@@ -14,11 +14,11 @@
 <nav>
     <div class="navbar bg-base-100 shadow-sm mb-2">
         <div class="navbar-start">
-            <a class="btn btn-ghost text-xl">Training Admin</a>
+            <a class="btn btn-ghost text-xl" href="/">Training Admin</a>
         </div>
         <div class="navbar-center">
             <ul class="menu menu-vertical lg:menu-horizontal bg-base-200 rounded-box px-1">
-                <li><a>Courses</a></li>
+                <li><a href="/courses/list">Courses</a></li>
                 <li><a>Deliveries</a></li>
                 <li><a>Students</a></li>
                 <li><a>Reservations</a></li>
@@ -28,7 +28,7 @@
         </div>
     </div>
 </nav>
-<main layout:fragment="content">
+<main layout:fragment="content" class="mx-50">
 </main>
 
 <script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
