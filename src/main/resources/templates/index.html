@@ -5,7 +5,25 @@
       layout:decorate="~{layout/main}">
 <body>
 <div layout:fragment="content">
-    <!-- Add content here -->
+    <div class="prose my-5">
+        <h1>Upcoming course deliveries</h1>
+    </div>
+    <table class="table mb-5" th:if="${not #lists.isEmpty(page.content)}">
+        <thead>
+        <tr>
+            <th class="w-3/8">Course ID</th>
+            <th class="w-5/8">Start Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="delivery : ${page.content}"  class="hover:bg-base-300">
+            <th th:text="${delivery.courseId}">COURSEID</th>
+            <td th:text="${#temporals.format(delivery.startDate, 'MMMM dd, yyyy')}">April 1, 2025</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
 </div>
 <th:block layout:fragment="script-content">
     <!-- Add additional scripts there that are only needed for this page (Application wide scripts should be added in layout/main.html) -->

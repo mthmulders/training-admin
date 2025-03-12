@@ -27,6 +27,44 @@
                 <button class="btn btn-primary mt-4" type="submit">Save</button>
             </fieldset>
         </form>
+
+        <div class="prose my-5">
+            <h2>Deliveries</h2>
+        </div>
+        <table class="table mb-25 w-full" th:if="${not #lists.isEmpty(course.deliveries)}">
+            <thead>
+            <tr>
+                <th class="w-7/8">Start Date</th>
+                <th class="w-1/8"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="delivery : ${course.deliveries}"  class="hover:bg-base-300">
+                <td th:text="${#temporals.format(delivery.startDate, 'MMMM dd, yyyy')}">April 1, 2025</td>
+                <td>
+                    <a th:href="'/courses/edit/' + ${course.courseId} + '/delivery/${delivery.id}'" class="inline-block" th:if="${not delivery.started()}">
+                        <span th:replace="~{shared/icons :: pencil-solid('icon stroke-current size-6')}">
+                        </span>
+                    </a>
+                    <a th:href="'/courses/delete/' + ${course.courseId} + '/delivery/${delivery.id}'" class="inline-block" th:if="${not delivery.started()}">
+                        <span th:replace="~{shared/icons :: trash-solid('icon stroke-error fill-error size-6')}">
+                        </span>
+                    </a>
+                    <span class="badge badge-soft badge-secondary" th:if="${delivery.started()}">Started</span>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3">
+                    <a role="button" class="btn btn-secondary" th:href="'/courses/edit/' + ${course.courseId} + '/delivery/new'">
+                        <span th:replace="~{shared/icons :: plus-circle-solid('icon size-6')}"></span>
+                        Add
+                    </a>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
     </div>
 </div>
 </body>

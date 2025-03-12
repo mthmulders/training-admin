@@ -5,6 +5,7 @@ import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import jakarta.validation.Valid;
 import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -13,10 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam
 
 @Controller
 @RequestMapping("/courses")
-class CoursesController(private val courseRepository: CourseRepository) {
+class CoursesController(
+    private val courseRepository: CourseRepository,
+    private val deliveryRepository: DeliveryRepository
+) {
     @GetMapping("/list")
     fun list(model: Model, @RequestParam("page") pageNumber: Int?): String {
-        val page = courseRepository.findAll(PageRequest.of(pageNumber ?: 0, PAGE_SIZE))
+        val page = courseRepository.findAll(PageRequest.of(pageNumber ?: 0, PAGE_SIZE, COURSE_ID_DESC))
         model.addAttribute("page", page)
 
         return "courses/list"
@@ -32,6 +36,27 @@ class CoursesController(private val courseRepository: CourseRepository) {
     fun edit(@PathVariable courseId: String, model: Model): String = withCourse(courseId) {
         model.addAttribute("course", it)
         "courses/edit"
+    }
+
+    @GetMapping("/edit/{courseId}/delivery/new")
+    fun createDelivery(@PathVariable courseId: String, model: Model): String = withCourse(courseId) {
+        val delivery = Delivery(null, requireNotNull(it.id))
+        model.addAttribute("course", it)
+        model.addAttribute("delivery", delivery)
+        "courses/new-delivery"
+    }
+
+    @PostMapping("/edit/{courseId}/delivery/save")
+    fun saveDelivery(@PathVariable courseId: String, @Valid delivery: Delivery, bindingResult: BindingResult, model: Model): String {
+        if (bindingResult.hasErrors()) {
+            return "courses/new-delivery"
+        }
+
+        return withCourse(courseId) {
+            it.addDelivery(deliveryRepository.save(delivery))
+            courseRepository.save(it)
+            "redirect:/courses/edit/$courseId"
+        }
     }
 
     @PostMapping("/save")
@@ -66,6 +91,7 @@ class CoursesController(private val courseRepository: CourseRepository) {
     }
 
     companion object {
-        const val PAGE_SIZE: Int = 10;
+        const val PAGE_SIZE: Int = 10
+        private val COURSE_ID_DESC = Sort.by(Sort.Direction.ASC, "courseId")
     }
 }

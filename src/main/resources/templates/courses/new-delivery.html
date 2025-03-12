@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<body>
+<div layout:fragment="content">
+    <div class="overflow-x-auto">
+        <form method="post" action="#" th:action="@{'/courses/edit/' + ${course.courseId} + '/delivery/save'}" th:object="${delivery}" class="w-full">
+            <fieldset class="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
+                <legend class="fieldset-legend">Delivery details</legend>
+
+                <input type="hidden" th:field="*{id}" />
+                <input type="hidden" th:field="*{courseId}" th:value="${courseId}" />
+
+                <label class="fieldset-label" for="courseIdDisplay">Course ID</label>
+                <input id="courseIdDisplay" type="text" th:value="${course.courseId}" class="input" readonly="readonly" />
+
+                <label class="fieldset-label" for="name">Start Date</label>
+                <input id="name" type="date" th:min="${#dates.format(#dates.createNow(),'YYYY-MM-dd')}" th:field="*{startDate}" th:class="${#fields.hasErrors('startDate') ? 'input input-error' : 'input'}" />
+                <div role="alert" class="alert alert-error alert-soft" th:if="${#fields.hasErrors('startDate')}">
+                    <span th:text="${#strings.listJoin(#fields.errors('startDate'), ', ')}">Error</span>
+                </div>
+
+                <button class="btn btn-primary mt-4" type="submit">Save</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+</body>
+</html>
