@@ -17,10 +17,6 @@ data class Course private constructor(
 ) {
     val deliveries: Set<Delivery> get() = _deliveries.toSet()
 
-    fun addDelivery(delivery: Delivery) {
-        _deliveries.add(delivery)
-    }
-
     @PersistenceCreator
     constructor(id: UUID?) : this(id, "", "", mutableSetOf())
 
