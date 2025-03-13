@@ -31,14 +31,14 @@
         <div class="prose my-5">
             <h2>Deliveries</h2>
         </div>
-        <table class="table mb-25 w-full" th:if="${not #lists.isEmpty(course.deliveries)}">
-            <thead>
+        <table class="table mb-25 w-full">
+            <thead th:if="${not #lists.isEmpty(course.deliveries)}">
             <tr>
                 <th class="w-7/8">Start Date</th>
                 <th class="w-1/8"></th>
             </tr>
             </thead>
-            <tbody>
+            <tbody th:if="${not #lists.isEmpty(course.deliveries)}">
             <tr th:each="delivery : ${course.deliveries}"  class="hover:bg-base-300">
                 <td th:text="${#temporals.format(delivery.startDate, 'MMMM dd, yyyy')}">April 1, 2025</td>
                 <td>
