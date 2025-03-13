@@ -42,11 +42,11 @@
             <tr th:each="delivery : ${course.deliveries}"  class="hover:bg-base-300">
                 <td th:text="${#temporals.format(delivery.startDate, 'MMMM dd, yyyy')}">April 1, 2025</td>
                 <td>
-                    <a th:href="'/courses/edit/' + ${course.courseId} + '/delivery/' + ${delivery.id} + '/edit'" class="inline-block" th:if="${not delivery.started()}">
+                    <a th:href="|/courses/edit/${course.courseId}/delivery/${delivery.id}/edit|" class="inline-block" th:if="${not delivery.started()}">
                         <span th:replace="~{shared/icons :: pencil-solid('icon stroke-current size-6')}">
                         </span>
                     </a>
-                    <a th:href="'/courses/edit/' + ${course.courseId} + '/delivery/' + ${delivery.id} + '/delete'" class="inline-block" th:if="${not delivery.started()}">
+                    <a th:href="|/courses/delete/${course.courseId}/delivery/${delivery.id}/delete|" class="inline-block" th:if="${not delivery.started()}">
                         <span th:replace="~{shared/icons :: trash-solid('icon stroke-error fill-error size-6')}">
                         </span>
                     </a>
@@ -57,7 +57,7 @@
             <tfoot>
             <tr>
                 <td colspan="3">
-                    <a role="button" class="btn btn-secondary" th:href="'/courses/edit/' + ${course.courseId} + '/delivery/new'">
+                    <a role="button" class="btn btn-secondary" th:href="|/courses/edit/${course.courseId}/delivery/new|">
                         <span th:replace="~{shared/icons :: plus-circle-solid('icon size-6')}"></span>
                         Add
                     </a>
