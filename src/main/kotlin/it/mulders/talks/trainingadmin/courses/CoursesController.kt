@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam
 @Controller
 @RequestMapping("/courses")
 class CoursesController(
-    private val courseRepository: CourseRepository,
-    private val deliveryRepository: DeliveryRepository
+    private val courseRepository: CourseRepository
 ) {
     @GetMapping("/list")
     fun list(model: Model, @RequestParam("page") pageNumber: Int?): String {
@@ -36,27 +35,6 @@ class CoursesController(
     fun edit(@PathVariable courseId: String, model: Model): String = withCourse(courseId) {
         model.addAttribute("course", it)
         "courses/edit"
-    }
-
-    @GetMapping("/edit/{courseId}/delivery/new")
-    fun createDelivery(@PathVariable courseId: String, model: Model): String = withCourse(courseId) {
-        val delivery = Delivery(null, requireNotNull(it.id))
-        model.addAttribute("course", it)
-        model.addAttribute("delivery", delivery)
-        "courses/new-delivery"
-    }
-
-    @PostMapping("/edit/{courseId}/delivery/save")
-    fun saveDelivery(@PathVariable courseId: String, @Valid delivery: Delivery, bindingResult: BindingResult, model: Model): String {
-        if (bindingResult.hasErrors()) {
-            return "courses/new-delivery"
-        }
-
-        return withCourse(courseId) {
-            it.addDelivery(deliveryRepository.save(delivery))
-            courseRepository.save(it)
-            "redirect:/courses/edit/$courseId"
-        }
     }
 
     @PostMapping("/save")

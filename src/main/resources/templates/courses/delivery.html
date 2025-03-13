@@ -17,7 +17,7 @@
                 <input id="courseIdDisplay" type="text" th:value="${course.courseId}" class="input" readonly="readonly" />
 
                 <label class="fieldset-label" for="name">Start Date</label>
-                <input id="name" type="date" th:min="${#dates.format(#dates.createNow(),'YYYY-MM-dd')}" th:field="*{startDate}" th:class="${#fields.hasErrors('startDate') ? 'input input-error' : 'input'}" />
+                <input id="name" type="date" th:min="${#temporals.format(#temporals.createNow(),'YYYY-MM-dd')}" th:field="*{startDate}" th:class="${#fields.hasErrors('startDate') ? 'input input-error' : 'input'}" />
                 <div role="alert" class="alert alert-error alert-soft" th:if="${#fields.hasErrors('startDate')}">
                     <span th:text="${#strings.listJoin(#fields.errors('startDate'), ', ')}">Error</span>
                 </div>
