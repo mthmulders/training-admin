@@ -13,7 +13,7 @@ data class Course private constructor(
     @field:Id  val id: UUID?,
     @field:NotNull @field:NotBlank val courseId: String,
     @field:NotNull @field:NotBlank val name: String,
-    @field:NotNull @field:MappedCollection(idColumn = "COURSE_ID", keyColumn = "ID") private val _deliveries: MutableSet<Delivery>,
+    @field:NotNull @field:MappedCollection(idColumn = "COURSE_ID", keyColumn = "ID") private val _deliveries: MutableSet<Delivery> = mutableSetOf(),
 ) {
     val deliveries: Set<Delivery> get() = _deliveries.toSet()
 
