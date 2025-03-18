@@ -16,10 +16,10 @@
         <div class="navbar-start">
             <a class="btn btn-ghost text-xl" href="/">Training Admin</a>
         </div>
-        <div class="navbar-center">
+        <div class="navbar-center" th:with="requestUri=${#ctx.getExchange().getRequest().getRequestURI()}">
             <ul class="menu menu-vertical lg:menu-horizontal bg-base-200 rounded-box px-1">
-                <li><a href="/courses/list">Courses</a></li>
-                <li><a>Students</a></li>
+                <li><a th:class="${#strings.contains(requestUri, 'courses') ? 'menu-active' : ''}" href="/courses/list">Courses</a></li>
+                <li><a th:class="${#strings.contains(requestUri, 'students') ? 'menu-active' : ''}" href="/students/list">Students</a></li>
                 <li><a>Reservations</a></li>
             </ul>
         </div>

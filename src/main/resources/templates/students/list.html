@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<body>
+<div layout:fragment="content">
+    <div class="overflow-x-auto">
+        <table class="table mb-5">
+            <thead th:if="${not #lists.isEmpty(page.content)}">
+            <tr>
+                <th class="w-1/8">Student ID</th>
+                <th class="w-3/8">Name</th>
+                <th class="w-3/8">Email</th>
+                <th class="w-1/8"></th>
+            </tr>
+            </thead>
+            <tbody th:if="${not #lists.isEmpty(page.content)}">
+            <tr th:each="student : ${page.content}" class="hover:bg-base-300">
+                <th class="text-center" th:text="${#numbers.formatInteger(student.studentId, 5)}">00001</th>
+                <td th:text="|${student.lastName}, ${student.firstName}|">Doe, John</td>
+                <td th:text="${student.email}">john.doe@example.com</td>
+                <td>
+                    <a th:href="|/students/edit/${#numbers.formatInteger(student.studentId, 5)}|" class="inline-block">
+                        <span th:replace="~{shared/icons :: pencil-solid('icon stroke-current size-6')}">
+                        </span>
+                    </a>
+                    <a th:href="|/students/delete/${#numbers.formatInteger(student.studentId, 5)}|" class="inline-block">
+                        <span th:replace="~{shared/icons :: trash-solid('icon stroke-error fill-error size-6')}">
+                        </span>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3">
+                    <a role="button" class="btn btn-secondary" href="/students/new">
+                        <span th:replace="~{shared/icons :: plus-circle-solid('icon size-6')}"></span>
+                        Add
+                    </a>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+        <div class="w-full text-center">
+            <div class="join ml-auto mr-auto">
+                <a role="button" class="join-item btn" th:disabled="${page.number == 0}" th:href="|/students/list?page=${page.number - 1}|">«</a>
+                <a role="button" class="join-item btn" th:disabled="disabled" href="#" th:text="|Page ${page.number + 1}|">Page 22</a>
+                <a role="button" class="join-item btn" th:disabled="${page.number == page.totalPages - 1}" th:href="|/students/list?page=${page.number + 1}|">»</a>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block layout:fragment="script-content">
+    <!-- Add additional scripts there that are only needed for this page (Application wide scripts should be added in layout/main.html) -->
+</th:block>
+</body>
+</html>

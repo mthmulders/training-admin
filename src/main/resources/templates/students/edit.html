@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<body>
+<div layout:fragment="content">
+    <div class="overflow-x-auto">
+        <form method="post" action="#" th:action="@{/students/save}" th:object="${student}">
+            <fieldset class="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
+                <legend class="fieldset-legend">Student details</legend>
+
+                <input type="hidden" th:field="*{id}" />
+
+                <label class="fieldset-label" for="studentId" th:if="${not(#strings.isEmpty(student.id))}" >Student ID</label>
+                <input id="studentId" class="input" th:field="*{studentId}" th:type="${#strings.isEmpty(student.id) ? 'hidden' : 'text'}" th:value="${#strings.isEmpty(student.id) ? '' : #numbers.formatInteger(student.studentId, 5)}" th:readonly="${not(#strings.isEmpty(student.id))}" />
+
+                <label class="fieldset-label" for="firstName">First Name</label>
+                <input id="firstName" type="text" th:field="*{firstName}" th:class="${#fields.hasErrors('firstName') ? 'input input-error' : 'input'}" />
+                <div role="alert" class="alert alert-error alert-soft" th:if="${#fields.hasErrors('firstName')}">
+                    <span th:text="${#strings.listJoin(#fields.errors('firstName'), ', ')}">Error</span>
+                </div>
+
+                <label class="fieldset-label" for="lastName">Last Name</label>
+                <input id="lastName" type="text" th:field="*{lastName}" th:class="${#fields.hasErrors('lastName') ? 'input input-error' : 'input'}" />
+                <div role="alert" class="alert alert-error alert-soft" th:if="${#fields.hasErrors('lastName')}">
+                    <span th:text="${#strings.listJoin(#fields.errors('lastName'), ', ')}">Error</span>
+                </div>
+
+                <label class="fieldset-label" for="lastName">Email</label>
+                <input id="email" type="email" th:field="*{email}" th:class="${#fields.hasErrors('email') ? 'input input-error' : 'input'}" />
+                <div role="alert" class="alert alert-error alert-soft" th:if="${#fields.hasErrors('email')}">
+                    <span th:text="${#strings.listJoin(#fields.errors('email'), ', ')}">Error</span>
+                </div>
+
+                <button class="btn btn-primary mt-4" type="submit">Save</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+</body>
+</html>
