@@ -13,7 +13,7 @@
                 <input type="hidden" th:field="*{id}" />
 
                 <label class="fieldset-label" for="courseId">Course ID</label>
-                <input id="courseId" type="text" th:field="*{courseId}" th:class="${#fields.hasErrors('name') ? 'input input-error' : 'input'}"  th:readonly="${not(#strings.isEmpty(id))}" />
+                <input id="courseId" type="text" th:field="*{courseId}" th:class="${#fields.hasErrors('name') ? 'input input-error' : 'input'}" th:readonly="${not(#strings.isEmpty(id))}" />
                 <div role="alert" class="alert alert-error alert-soft" th:if="${#fields.hasErrors('courseId')}">
                     <span th:text="${#strings.listJoin(#fields.errors('courseId'), ', ')}">Error</span>
                 </div>
