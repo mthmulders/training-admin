@@ -86,7 +86,7 @@ class AddRegistrationController(
 
         sessionStatus.setComplete()
 
-        return "/index"
+        return "redirect:/"
     }
 
 

@@ -33,7 +33,7 @@ class HomeController(
 
         model.addAttribute("page", page)
 
-        return "index";
+        return "index"
     }
 
     companion object {
