@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<body>
+<div layout:fragment="content">
+    <div class="overflow-x-auto">
+        <div class="w-full text-center">
+            <ul class="steps">
+                <li class="step step-primary"><a href="/registrations/add">Select student</a></li>
+                <li class="step step-primary"><a th:href="|/registrations/add?studentId=${student.studentId}|">Select course</a></li>
+                <li class="step step-primary"><a th:href="|/registrations/add?studentId=${student.studentId}&amp;courseId=${course.courseId}|">Select delivery</a></li>
+                <li class="step">Confirm</li>
+            </ul>
+        </div>
+        <form class="mt-5">
+            <div id="delivery-search-results" class="my-2 p-2">
+                <table class="table-md table-zebra w-full" th:if="${not #lists.isEmpty(result)}">
+                    <thead></thead>
+                    <tbody>
+                    <tr th:each="delivery : ${result}">
+                        <td th:text="${#temporals.format(delivery.startDate, 'MMMM dd, yyyy')}">April 1, 2025</td>
+                        <td><a role="button" class="btn-primary btn" th:href="|/registrations/add?studentId=${student.studentId}&amp;courseId=${course.courseId}&amp;deliveryId=${delivery.id}|">» Next</a></td>
+                    </tr>
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+<th:block layout:fragment="script-content">
+    <!-- Add additional scripts there that are only needed for this page (Application wide scripts should be added in layout/main.html) -->
+</th:block>
+</body>
+</html>

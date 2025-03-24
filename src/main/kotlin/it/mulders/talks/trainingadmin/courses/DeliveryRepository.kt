@@ -11,4 +11,5 @@ import java.util.UUID
 @Component
 interface DeliveryRepository : CrudRepository<Delivery, UUID>, PagingAndSortingRepository<Delivery, UUID> {
     fun findByStartDateIsAfter(date: LocalDate, pageable: Pageable): Page<Delivery>
+    fun findByCourseIdAndStartDateIsAfter(courseId: UUID, startDate: LocalDate): Collection<Delivery>
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<body>
+<div layout:fragment="content">
+    <div class="overflow-x-auto">
+        <div class="w-full text-center">
+            <ul class="steps">
+                <li class="step step-primary"><a href="/registrations/add">Select student</a></li>
+                <li class="step step-primary"><a th:href="|/registrations/add?studentId=${student.studentId}|">Select course</a></li>
+                <li class="step">Select delivery</li>
+                <li class="step">Confirm</li>
+            </ul>
+        </div>
+        <form class="mt-5">
+            <label class="input">
+                <span th:replace="~{shared/icons :: magnifying-glass-solid('icon size-6 h-[1em] opacity-50')}"></span>
+                <input type="text" name="term"
+                       class="input"
+                       required="required" placeholder="Search"
+                       hx-get="/registrations/search/course"
+                       hx-trigger="input changed delay:500ms, keyup[key=='Enter'], load"
+                       hx-target="#course-search-results"
+                       hx-select="#content"
+                       hx-indicator=".htmx-indicator"
+                       hx-swap="innerHTML"
+                />
+            </label>
+            <div class="htmx-indicator">
+                Searching... <span class="loading loading-dots loading-md"></span>
+            </div>
+            <div id="course-search-results" class="my-2 p-2">
+                Start by searching a course using the input above.
+            </div>
+        </form>
+    </div>
+</div>
+<th:block layout:fragment="script-content">
+    <!-- Add additional scripts there that are only needed for this page (Application wide scripts should be added in layout/main.html) -->
+</th:block>
+</body>
+</html>

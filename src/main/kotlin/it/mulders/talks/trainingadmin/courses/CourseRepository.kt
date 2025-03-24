@@ -12,6 +12,7 @@ interface CourseRepository : CrudRepository<Course, UUID>, PagingAndSortingRepos
 
     @Query("select id, course_id from course where id in (:ids)")
     fun findCourseIdsByIdIn(ids: Collection<UUID>): Collection<IdAndCourseId>
+    fun findByCourseIdLikeIgnoreCase(term: String): Collection<Course>
 
     data class IdAndCourseId (
         val id: UUID,

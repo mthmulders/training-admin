@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<body>
+<div layout:fragment="content">
+    <div class="overflow-x-auto">
+        <div class="w-full text-center">
+            <ul class="steps">
+                <li class="step step-primary"><a href="/registrations/add">Select student</a></li>
+                <li class="step step-primary"><a th:href="|/registrations/add?studentId=${student.studentId}|">Select course</a></li>
+                <li class="step step-primary"><a th:href="|/registrations/add?studentId=${student.studentId}&amp;courseId=${course.courseId}|">Select delivery</a></li>
+                <li class="step step-primary">Confirm</li>
+            </ul>
+        </div>
+        <div class="mt-5 hero bg-base-200">
+            <div class="hero-content text-center">
+                <div class="max-w-md">
+                    <h2 class="text-5xl font-bold">Summary</h2>
+                    <table class="table mt-2">
+                        <thead></thead>
+                        <tbody>
+                        <tr>
+                            <th>Student</th>
+                            <td th:text="|${student.lastName}, ${student.firstName}|">Doe, John</td>
+                        </tr>
+                        <tr>
+                            <th>Course</th>
+                            <td th:text="|${course.name} (${course.courseId})|">Spring Boot (SPRINGB)</td>
+                        </tr>
+                        <tr>
+                            <th>Start Date</th>
+                            <td th:text="${#temporals.format(delivery.startDate, 'MMMM dd, yyyy')}">April 1, 2025</td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td>
+                                <form action="/registrations/add" method="post">
+<!--                                    <input type="hidden" name="courseId" th:value="${course.id}" />-->
+<!--                                    <input type="hidden" name="deliveryId" th:value="${delivery.id}" />-->
+<!--                                    <input type="hidden" name="studentId" th:value="${student.id}" />-->
+                                    <button type="submit" class="btn btn-primary">Confirm</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block layout:fragment="script-content">
+    <!-- Add additional scripts there that are only needed for this page (Application wide scripts should be added in layout/main.html) -->
+</th:block>
+</body>
+</html>
