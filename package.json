@@ -4,7 +4,7 @@
     "@babel/cli": "^7.26.4",
     "@tailwindcss/container-queries": "0.1.1",
     "@tailwindcss/forms": "0.5.10",
-    "@tailwindcss/postcss": "4.0.15",
+    "@tailwindcss/postcss": "4.0.16",
     "@tailwindcss/typography": "0.5.16",
     "autoprefixer": "10.4.21",
     "browser-sync": "3.0.3",
