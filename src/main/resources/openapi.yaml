@@ -1,0 +1,62 @@
+openapi: 3.0.0
+info:
+  title: Training Admin API specification
+  description: |
+    Training Admin is a fictitious application for managing an educational organisation.
+    This specification describes all programmatic access to Training Admin.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Development instance
+tags:
+  - name: Payment
+    description: Operations that deal with payment processing.
+paths:
+  "/api/v1/payment/notify":
+    post:
+      operationId: Payment_notifyPayment
+      description: Processes a notification of a payment.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/payment-notification-payload"
+        description: Receive notification of processed payment
+        required: true
+      responses:
+        "204":
+          description: The notification of the payment has been processed successfully.
+        "404":
+          description: The notification refers to a payment that could not be matched with a training reservation.
+        "500":
+          description: The notification could not be processed.
+      tags:
+        - Payment
+components:
+  schemas:
+    payment-notification-payload:
+      description: Notification of a payment that has been received and booked in the financial administration.
+      type: "object"
+      properties:
+        "reference":
+          description: "Reservation reference number"
+          required: true
+          type: string
+        "timestamp":
+          description: "Date and time the payment status was received"
+          format: "date-time"
+          required: true
+          type: string
+        "status":
+          description: "Status of the payment as per \"timestamp\""
+          required: true
+          type: string
+          enum:
+          - cancelled
+          - confirmed
+          - received
+      example:
+        "reference": 019571
+        "timestamp": "2025-04-14T21:55:22Z"
+        "status": "confirmed"
+  securitySchemes: {}
