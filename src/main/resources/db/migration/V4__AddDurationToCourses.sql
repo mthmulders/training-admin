@@ -1,4 +1,5 @@
-ALTER TABLE course ADD COLUMN duration INT NOT NULL;
+ALTER TABLE course ADD COLUMN duration INT;
 
--- P3966
 UPDATE course SET duration = 0 WHERE duration IS NULL;
+
+ALTER TABLE course ALTER COLUMN duration SET NOT NULL;
