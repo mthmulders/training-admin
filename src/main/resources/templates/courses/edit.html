@@ -24,6 +24,12 @@
                     <span th:text="${#strings.listJoin(#fields.errors('name'), ', ')}">Error</span>
                 </div>
 
+                <label class="fieldset-label" for="duration">Duration (days)</label>
+                <input id="duration" type="number" th:field="*{duration}" th:class="${#fields.hasErrors('duration') ? 'input input-error' : 'input'}" />
+                <div role="alert" class="alert alert-error alert-soft" th:if="${#fields.hasErrors('duration')}">
+                    <span th:text="${#strings.listJoin(#fields.errors('duration'), ', ')}">Error</span>
+                </div>
+
                 <button class="btn btn-primary mt-4" type="submit">Save</button>
             </fieldset>
         </form>
