@@ -1,6 +1,5 @@
-package it.mulders.talks.trainingadmin.courses
+package it.mulders.talks.trainingadmin.students
 
-import it.mulders.talks.trainingadmin.students.Student
 import org.springframework.data.relational.core.mapping.event.BeforeConvertCallback
 import org.springframework.stereotype.Component
 import java.util.UUID

@@ -9,11 +9,11 @@ import org.springframework.data.relational.core.mapping.MappedCollection
 import java.util.UUID
 
 @Persistent
-data class Course private constructor(
+data class Course constructor(
     @field:Id  val id: UUID?,
     @field:NotNull @field:NotBlank val courseId: String,
     @field:NotNull @field:NotBlank val name: String,
-    @field:NotNull @field:MappedCollection(idColumn = "COURSE_ID", keyColumn = "ID") private val _deliveries: MutableSet<Delivery> = mutableSetOf(),
+    @field:NotNull @field:MappedCollection(idColumn = "COURSE_ID", keyColumn = "ID") private val _deliveries: Set<Delivery> = mutableSetOf(),
 ) {
     val deliveries: Set<Delivery> get() = _deliveries.toSet()
 
@@ -21,8 +21,4 @@ data class Course private constructor(
     constructor(id: UUID?) : this(id, "", "", mutableSetOf())
 
     constructor() : this(null)
-
-    companion object {
-        operator fun invoke(id: UUID?, courseId: String, name: String, deliveries: Set<Delivery>): Course = this(id, courseId, name, deliveries)
-    }
 }

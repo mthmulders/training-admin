@@ -20,8 +20,4 @@ data class Student(
     constructor(id: UUID?) : this(id, 0, "", "", "")
 
     constructor() : this(null)
-
-    companion object {
-        operator fun invoke(id: UUID?, studentId: Long, firstName: String, lastName: String): Course = this(id, studentId, firstName, lastName)
-    }
 }
