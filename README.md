@@ -4,7 +4,8 @@ Training Admin is a fictitious application.
 It is not designed to be production ready, nor will it ever be.
 I wrote it solely to illustrate the capabilities and the disabilities of digital coding assistants such as GitHub Copilot Workspaces.
 
-The functional scope is a training provider that wants to administer
+The functional scope is administrative support for a training providing company that wants to administer
+
 - The courses they offer
 - When the courses are delivered
 - The reservations for course deliveries
